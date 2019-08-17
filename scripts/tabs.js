@@ -5,6 +5,8 @@ let activeClass = "active";
 let createdClass = "created";
 let closeTabClass = "closeTab";
 let defaultOpenClass = "defaultOpen";
+let removeOnLoadedClass = "removeOnLoaded";
+let isLocalhostId = "isLocalhost";
 var Title = null;
 var lastTab = null;
 
@@ -36,20 +38,33 @@ function createTabHeader(container) {
     var bar = document.createElement("div");
     bar.classList.add(tabClass);
     bar.appendChild(createCloseButton());
+    var chk = document.createElement("input");
+    chk.type="checkbox";
+    chk.id=isLocalhostId;
+    chk.title="On Localhost Network";
+    bar.appendChild(chk);
     container.appendChild(bar);
     return {
-        insertTab : (id, url, text, isDefault) => insertTab(bar, id, url, text, isDefault),
-        openDefault: () => bar.getElementsByClassName(defaultOpenClass)[0].click()
+        localhostCheckbox : document.getElementById(isLocalhostId),
+        insertTab : (id, url, text, isDefault) => insertTab(bar, id, url(true), url(false), text, isDefault),
+        start: (openFirst) => {
+            if(openFirst){
+                bar.getElementsByClassName(tabLinksClass)[0].click();
+            }
+            for (const rem of document.getElementsByClassName(removeOnLoadedClass)) {
+                rem.remove();
+            }
+        }
     };
 }
 
-function insertTab(bar, id, url, text, isDefault) {
+function insertTab(bar, id, localUrl, url, text, isDefault) {
     var btn = document.createElement("button");
     btn.classList.add(tabLinksClass);
     if(isDefault){
         btn.classList.add(defaultOpenClass);
     }
-    btn.addEventListener("click",() => createTab(btn, id, url));
+    btn.addEventListener("click",() => createTab(btn, id, document.getElementById(isLocalhostId).checked ? localUrl : url));
     btn.innerText=text;
     bar.appendChild(btn);
 }

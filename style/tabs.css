@@ -6,7 +6,7 @@
   }
   
   /* Style the buttons that are used to open the tab content */
-  .tab button {
+  .tab button, .tab input[type=checkbox] {
     background-color: inherit;
     float: left;
     border: none;
@@ -16,8 +16,13 @@
     transition: 0.3s;
   }
   
+  .tab input[type=checkbox] {
+    display: none;
+    float: right;
+  }
+  
   /* Change background color of buttons on hover */
-  .tab button:hover {
+  .tab button:hover, .tab input[type=checkbox]:hover {
     background-color: #ddd;
   }
   
@@ -36,8 +41,13 @@
   }
   
   /* Create an created tablink class */
-  .tab button.created {
+  .tab:hover button.created {
     text-decoration: underline;
+  }
+  
+  /* Create an created tablink class */
+  .tab:hover input[type=checkbox] {
+    display: block;
   }
   
   /* Style the tab content */
