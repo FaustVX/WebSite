@@ -5,7 +5,6 @@ let activeClass = "active";
 let createdClass = "created";
 let closeTabClass = "closeTab";
 let defaultOpenClass = "defaultOpen";
-let removeOnLoadedClass = "removeOnLoaded";
 let isLocalhostId = "isLocalhost";
 var Title = null;
 var lastTab = null;
@@ -50,9 +49,6 @@ function createTabHeader(container) {
         start: (openFirst) => {
             if(openFirst){
                 bar.getElementsByClassName(tabLinksClass)[0].click();
-            }
-            for (const rem of document.getElementsByClassName(removeOnLoadedClass)) {
-                rem.remove();
             }
         }
     };
