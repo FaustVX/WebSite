@@ -44,6 +44,21 @@ function createTabHeader(container) {
     chk.title="On Localhost Network";
     chk.classList.add(OnTabHoverClass);
     bar.appendChild(chk);
+    var file = document.createElement("input");
+    file.type = "file";
+    file.classList.add(OnTabHoverClass);
+    file.accept = "text/javascript, application/javascript";
+    file.addEventListener("change", (i) => {
+        var selectedFile = i.target.files[0];
+        i.target.value = null;
+        var reader = new FileReader();
+        reader.onload = function() {
+             eval(reader.result);
+             setAddress();
+        };
+        reader.readAsText(selectedFile);
+    });
+    bar.appendChild(file);
     container.appendChild(bar);
     return {
         localhostCheckbox : document.getElementById(isLocalhostId),
