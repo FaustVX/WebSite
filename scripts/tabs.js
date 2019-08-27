@@ -65,16 +65,32 @@ function insertTab(bar, id, localUrl, url, text, isDefault) {
     bar.appendChild(btn);
 }
 
-function injectCSS(path) {
-    var cssId = path.split("/").pop().split(".")[0];
-    if (!document.getElementById(cssId)) {
-        var head = document.getElementsByTagName('head')[0];
+function injectCSS(path){
+    InjectInHead(path, () => {
         var link = document.createElement('link');
-        link.id = cssId;
         link.rel = 'stylesheet';
         link.type = 'text/css';
         link.href = path;
-        head.appendChild(link);
+        return link;
+    });
+}
+
+function injectJS(path){
+    InjectInHead(path, () => {
+        var script = document.createElement('link');
+        script.type = 'text/javascript';
+        script.src = path;
+        return script;
+    });
+}
+
+function InjectInHead(path, func) {
+    var id = path.split("/").pop().split(".")[0];
+    if (!document.getElementById(id)) {
+        var head = document.querySelector("head");
+        var elem = func();
+        elem.id = id;
+        head.appendChild(elem);
     }
 }
 
