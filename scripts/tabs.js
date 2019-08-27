@@ -6,6 +6,7 @@ let createdClass = "created";
 let closeTabClass = "closeTab";
 let defaultOpenClass = "defaultOpen";
 let isLocalhostId = "isLocalhost";
+let OnTabHoverClass = "on-tab-hover";
 var Title = null;
 var lastTab = null;
 
@@ -41,6 +42,7 @@ function createTabHeader(container) {
     chk.type="checkbox";
     chk.id=isLocalhostId;
     chk.title="On Localhost Network";
+    chk.classList.add(OnTabHoverClass);
     bar.appendChild(chk);
     container.appendChild(bar);
     return {

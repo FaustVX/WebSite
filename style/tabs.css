@@ -17,13 +17,15 @@
   }
   
   .tab input[type=checkbox] {
-    display: none;
     float: right;
   }
   
-  /* Change background color of buttons on hover */
-  .tab button:hover, .tab input[type=checkbox]:hover {
-    background-color: #ddd;
+  .tab:hover .on-tab-hover{
+    display: block;
+  }
+  
+  .on-tab-hover{
+    display: none;
   }
   
   .tab button.closeTab {
@@ -43,11 +45,6 @@
   /* Create an created tablink class */
   .tab:hover button.created {
     text-decoration: underline;
-  }
-  
-  /* Create an created tablink class */
-  .tab:hover input[type=checkbox] {
-    display: block;
   }
   
   /* Style the tab content */
